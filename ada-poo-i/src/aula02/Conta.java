@@ -13,9 +13,9 @@ public class Conta {
     * O método toString() deve retornar uma string contendo todas as informações da conta.
     * */
 
-    Cliente titular;
-    String numeroDaConta;
-    double saldo;
+    private final Cliente titular;
+    private final String numeroDaConta;
+    private double saldo;
 
     public Conta(Cliente titular, String numeroDaConta) {
         this.titular = titular;
@@ -40,6 +40,10 @@ public class Conta {
         } else {
             this.saldo -= quantia;
         }
+    }
+
+    public String getNumeroDaConta() {
+        return this.numeroDaConta;
     }
 
     @Override

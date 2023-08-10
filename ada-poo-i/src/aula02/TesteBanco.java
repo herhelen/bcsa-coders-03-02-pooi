@@ -102,5 +102,6 @@ public class TesteBanco {
         } while (op != 0);
 
         sc.close();
+
     }
 }

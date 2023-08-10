@@ -1,6 +1,7 @@
 package aula02;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Banco {
 
@@ -15,7 +16,7 @@ public class Banco {
 
 
     private int contadorNumeroConta;
-    private ArrayList<Conta> contas;
+    private List<Conta> contas;
 
     public Banco() {
         this.contadorNumeroConta = 0;
@@ -27,27 +28,22 @@ public class Banco {
         Cliente cliente = new Cliente(nome, cpf, email);
         Conta conta = new Conta(cliente, numeroConta);
 
-        // todo: precisa verificar se já tem conta com tal cliente?
         this.contas.add(conta);
 
-        return conta.numeroDaConta;
+        return conta.getNumeroDaConta();
     }
 
     public Conta buscarConta(String numeroDaConta) {
-
         for (Conta c: this.contas) {
-            if(c.numeroDaConta.equals(numeroDaConta)) {
+            if(c.getNumeroDaConta().equals(numeroDaConta)) {
                 return c;
             }
         }
 
-        // todo: melhorar isso?
-        System.out.println("Conta " + numeroDaConta + " não encontrada.");
         return null;
     }
 
     public void depositar(String numeroDaConta, double quantia) {
-
         Conta c = this.buscarConta(numeroDaConta);
 
         if(c != null) {
@@ -57,7 +53,6 @@ public class Banco {
     }
 
     public void sacar(String numeroDaConta, double quantia) {
-
         Conta c = this.buscarConta(numeroDaConta);
 
         if(c != null) {
@@ -72,4 +67,5 @@ public class Banco {
             this.contas.size(),
             this.contadorNumeroConta);
     }
+
 }

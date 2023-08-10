@@ -10,9 +10,9 @@ public class Cliente {
     * O método toString() deve retornar uma string contendo todas as informações do cliente.
     * */
 
-    String nome;
-    String cpf;
-    String email;
+    private String nome;
+    private String cpf;
+    private String email;
 
     public Cliente(String nome, String cpf, String email) {
         this.nome = nome;
