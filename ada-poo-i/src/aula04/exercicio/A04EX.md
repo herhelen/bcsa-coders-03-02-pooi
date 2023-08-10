@@ -5,46 +5,37 @@ Desenvolver um sistema de pedidos para restaurantes e utilize os princípios <br
 de Orientação a Objetos pratique a organização de código em pacotes, classes e métodos.
 
 ### Requisitos Funcionais:
-- Cadastrar Restaurante:<br />
+- #### Cadastrar Restaurante:
   O sistema deve permitir o cadastro de restaurantes.<br />
   Cada restaurante deve ter um nome, endereço e uma lista de pratos disponíveis.<br />
-  <br />
-- Listar Restaurantes:<br />
+- #### Listar Restaurantes:
   Os usuários devem ser capazes de ver uma lista de todos os restaurantes cadastrados no sistema.<br />
-  <br />
-- Adicionar Prato:<br />
+- #### Adicionar Prato:
   O sistema deve permitir que os restaurantes adicionem pratos ao seu menu.<br />
   Cada prato deve ter um nome, preço e descrição.<br />
-  <br />
-- Listar Pratos de um Restaurante:<br />
+- #### Listar Pratos de um Restaurante:
   Os usuários devem ser capazes de ver a lista de pratos disponíveis de um restaurante selecionado.<br />
-  <br />
-- Fazer um Pedido:<br />
+- #### Fazer um Pedido:
   Os usuários devem ser capazes de fazer um pedido selecionando um restaurante<br />
   escolhendo os pratos desejados e fornecendo um endereço de entrega.<br />
-  <br />
-- Listar pedidos de um restaurante:<br />
+- #### Listar pedidos de um restaurante:
   Os restaurantes devem conseguir listar todos os pedidos recebidos<br />
-  <br />
-- Ver Pedidos de um Cliente:<br />
+- #### Ver Pedidos de um Cliente:
   Os usuários devem ser capazes de ver uma lista de todos os seus pedidos anteriores.<br />
 
 ### Instruções:
-- Organização do código:<br />
+- #### Organização do código:
   Seu código deve estar bem organizado em pacotes, classes e métodos. <br />
   Por exemplo, você pode ter pacotes separados para modelos (como Restaurante, Prato e Pedido), <br />
   serviços (lógicas relacionadas a pedidos e restaurantes) e <br />
   visualização (interface do usuário e menus).<br />
-  <br />
-- Orientação a Objetos:<br />
+- #### Orientação a Objetos:
   Aproveite os conceitos de OO, como encapsulamento, herança (se necessário).<br />
   Priorize a reutilização de código e a modularidade.<br />
-  <br />
-- Interface do Usuário:<br />
+- #### Interface do Usuário:
   Desenvolva um menu interativo simples no console<br />
   como o fornecido anteriormente para que os usuários possam interagir com o sistema.<br />
-  <br />
-- Armazenamento:<br />
+- #### Armazenamento:
   Para simplificar, os dados podem ser armazenados em estruturas<br />
   de dados em memória (como listas ou mapas) ao invés de um banco de dados.<br />
   
