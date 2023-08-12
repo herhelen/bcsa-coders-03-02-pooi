@@ -1,11 +1,20 @@
 package aula04.exercicio.dominio;
 
-public class Pedido {
-    // lista de pratos
-    private String enderecoEntrega;
+import java.util.List;
 
-    public Pedido(String enderecoEntrega) {
+public class Pedido {
+    private final int idPedido;
+    private String enderecoEntrega;
+    private List<Prato> pratos;
+
+    public Pedido(int idPedido, String enderecoEntrega, List<Prato> pratos) {
+        this.idPedido = idPedido;
         this.enderecoEntrega = enderecoEntrega;
+        this.pratos = pratos;
+    }
+
+    public int getIdPedido() {
+        return this.idPedido;
     }
 
     public String getEnderecoEntrega() {
@@ -16,10 +25,21 @@ public class Pedido {
         this.enderecoEntrega = enderecoEntrega;
     }
 
+    public List<Prato> getPratos() {
+        return this.pratos;
+    }
+
+    public void setPratos(List<Prato> pratos) {
+        this.pratos = pratos;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
-                "enderecoEntrega='" + this.enderecoEntrega + '\'' +
+                "idPedido=" + this.idPedido +
+                ", enderecoEntrega='" + this.enderecoEntrega + '\'' +
+                ", pratos=" + this.pratos +
                 '}';
     }
+
 }

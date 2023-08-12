@@ -1,14 +1,20 @@
 package aula04.exercicio.dominio;
 
 public class Prato {
+    private final int idPrato;
     private String nome;
     private double preco;
     private String descricao;
 
-    public Prato(String nome, double preco, String descricao) {
+    public Prato(int idPrato, String nome, double preco, String descricao) {
+        this.idPrato = idPrato;
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
+    }
+
+    public int getIdPrato() {
+        return this.idPrato;
     }
 
     public String getNome() {
@@ -38,8 +44,9 @@ public class Prato {
     @Override
     public String toString() {
         return "Prato{" +
-                "nome='" + this.nome + '\'' +
-                ", preco=" + String.format("%.2f", this.preco) +
+                "idPrato=" + this.idPrato +
+                ", nome='" + this.nome + '\'' +
+                ", preco=" + this.preco +
                 ", descricao='" + this.descricao + '\'' +
                 '}';
     }
