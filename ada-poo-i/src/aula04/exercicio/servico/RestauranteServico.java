@@ -38,7 +38,7 @@ public class RestauranteServico {
         Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
 
         if(restaurante != null) {
-            restaurante.getMenuPratos().add(new Prato(++CONTADOR_ID_PRATO, nome, preco, descricao));
+            restaurante.getMenuPratos().add(new Prato(++CONTADOR_ID_PRATO, restaurante.getIdRestaurante(), nome, preco, descricao));
         }
     }
 
