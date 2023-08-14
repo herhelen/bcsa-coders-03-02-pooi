@@ -55,7 +55,7 @@ public class RestauranteServico {
     public void fazPedido(String nomeCliente, String nomeRestaurante, String enderecoEntrega, List<Prato> pratos, ClienteServico clienteServico) {
         Cliente cliente = clienteServico.buscaCliente(nomeCliente);
         Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
-        Pedido pedido = new Pedido(++CONTADOR_ID_PEDIDO, enderecoEntrega, pratos);
+        Pedido pedido = new Pedido(++CONTADOR_ID_PEDIDO, restaurante.getIdRestaurante(), cliente.getIdCliente(), enderecoEntrega, pratos);
 
         System.out.println(pedido);
     }
