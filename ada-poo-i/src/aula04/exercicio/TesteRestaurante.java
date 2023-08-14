@@ -7,6 +7,7 @@ import aula04.exercicio.repositorio.ClienteRepositorio;
 import aula04.exercicio.repositorio.PratoRepositorio;
 import aula04.exercicio.repositorio.RestauranteRepositorio;
 import aula04.exercicio.servico.ClienteServico;
+import aula04.exercicio.servico.PratoServico;
 import aula04.exercicio.servico.RestauranteServico;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class TesteRestaurante {
 
         RestauranteServico restauranteServico = new RestauranteServico(new RestauranteRepositorio());
         ClienteServico clienteServico = new ClienteServico(new ClienteRepositorio());
+        PratoServico pratoServico = new PratoServico(new PratoRepositorio());
 
         restauranteServico.criaRestaurante(nomeRestau, "Endereco A");
 
@@ -28,13 +30,14 @@ public class TesteRestaurante {
             System.out.println(r);
         }
 
-        restauranteServico.criaPrato(nomeRestau, "Prato 1", 10, "Prato Desc 1");
-        restauranteServico.criaPrato(nomeRestau, "Prato 2", 30, "Prato Desc 2");
-        restauranteServico.criaPrato(nomeRestau, "Prato 3", 99.9, "Prato Desc 3");
-        restauranteServico.criaPrato(nomeRestau, "Prato 4", 15.5, "Prato Desc 4");
+        pratoServico.criaPrato(nomeRestau, "Prato 1", 10, "Prato Desc 1", restauranteServico);
+        pratoServico.criaPrato(nomeRestau, "Prato 2", 30, "Prato Desc 2", restauranteServico);
+        pratoServico.criaPrato(nomeRestau, "Prato 3", 99.9, "Prato Desc 3", restauranteServico);
+        pratoServico.criaPrato(nomeRestau, "Prato 4", 15.5, "Prato Desc 4", restauranteServico);
+
 
         List<Prato> pratos = new ArrayList<>();
-        for (Prato p: restauranteServico.listaMenuRestaurante(nomeRestau)) {
+        for (Prato p: restauranteServico.listaMenuRestaurante(nomeRestau, pratoServico)) {
             System.out.println(p);
             if(p.getIdPrato() % 2 == 0) {
                 pratos.add(p);

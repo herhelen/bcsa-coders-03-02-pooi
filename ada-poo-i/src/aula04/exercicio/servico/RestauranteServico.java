@@ -4,7 +4,6 @@ import aula04.exercicio.dominio.Cliente;
 import aula04.exercicio.dominio.Pedido;
 import aula04.exercicio.dominio.Prato;
 import aula04.exercicio.dominio.Restaurante;
-import aula04.exercicio.repositorio.PratoRepositorio;
 import aula04.exercicio.repositorio.RestauranteRepositorio;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class RestauranteServico {
 
     private RestauranteRepositorio restauranteRepositorio;
     private static int CONTADOR_ID_RESTAURANTE;
-    private static int CONTADOR_ID_PRATO;
+
     private static int CONTADOR_ID_PEDIDO;
 
 
@@ -34,22 +33,8 @@ public class RestauranteServico {
         return this.restauranteRepositorio.get(nomeRestaurante);
     }
 
-    public void criaPrato(String nomeRestaurante, String nome, double preco, String descricao) {
-        Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
-
-        if(restaurante != null) {
-            restaurante.getMenuPratos().add(new Prato(++CONTADOR_ID_PRATO, restaurante.getIdRestaurante(), nome, preco, descricao));
-        }
-    }
-
-    public List<Prato> listaMenuRestaurante(String nomeRestaurante) {
-        Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
-
-        if(restaurante != null) {
-            return restaurante.getMenuPratos();
-        }
-
-        return null;
+    public List<Prato> listaMenuRestaurante(String nomeRestaurante, PratoServico pratoServico) {
+        return pratoServico.listaPratosRestaurante(nomeRestaurante, this);
     }
 
     public void fazPedido(String nomeCliente, String nomeRestaurante, String enderecoEntrega, List<Prato> pratos, ClienteServico clienteServico) {
@@ -60,7 +45,6 @@ public class RestauranteServico {
         System.out.println(pedido);
     }
 
-    // listar os pratos do restau usando PratoServico (PratoRepositorio) ao invés de salvar no Model?
     // listar os pedidos do restau usando PedidoServico (PedidoRepositorio)
 
 }
