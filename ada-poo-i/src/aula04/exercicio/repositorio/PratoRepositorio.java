@@ -25,6 +25,14 @@ public class PratoRepositorio {
         return null;
     }
 
+    public Prato get(int idPrato) {
+        for (Prato prato : this.lista) {
+            if (prato.getIdPrato() == idPrato)
+                return prato;
+        }
+        return null;
+    }
+
     public List<Prato> findAll() {
         return Collections.unmodifiableList(this.lista);
     }

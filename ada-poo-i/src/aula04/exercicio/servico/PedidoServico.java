@@ -55,4 +55,18 @@ public class PedidoServico {
 
         return null;
     }
+
+    public List<Pedido> listaPedidosRestaurante(int idRestaurante) {
+        return this.pedidoRepositorio.findAll()
+                .stream()
+                .filter(f -> f.getIdRestaurante() == idRestaurante)
+                .collect(Collectors.toList());
+    }
+
+    public List<Pedido> listaPedidosCliente(int idCliente) {
+        return this.pedidoRepositorio.findAll()
+                .stream()
+                .filter(f -> f.getIdCliente() == idCliente)
+                .collect(Collectors.toList());
+    }
 }

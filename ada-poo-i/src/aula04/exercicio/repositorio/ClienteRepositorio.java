@@ -25,6 +25,14 @@ public class ClienteRepositorio {
         return null;
     }
 
+    public Cliente get(int idCliente) {
+        for (Cliente cliente : this.lista) {
+            if (cliente.getIdCliente() == idCliente)
+                return cliente;
+        }
+        return null;
+    }
+
     public List<Cliente> findAll() {
         return Collections.unmodifiableList(lista);
     }

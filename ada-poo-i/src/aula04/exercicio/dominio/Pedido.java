@@ -8,6 +8,7 @@ public class Pedido {
     private final int idCliente;
     private String enderecoEntrega;
     private List<Prato> pratos;
+    private double valorTotal;
 
     public Pedido(int idPedido, int idRestaurante, int idCliente, String enderecoEntrega, List<Prato> pratos) {
         this.idPedido = idPedido;
@@ -15,6 +16,7 @@ public class Pedido {
         this.idCliente = idCliente;
         this.enderecoEntrega = enderecoEntrega;
         this.pratos = pratos;
+        calculaValorTotal();
     }
 
     public int getIdPedido() {
@@ -43,6 +45,11 @@ public class Pedido {
 
     public void setPratos(List<Prato> pratos) {
         this.pratos = pratos;
+        calculaValorTotal();
+    }
+
+    public double getValorTotal() {
+        return this.valorTotal;
     }
 
     @Override
@@ -53,7 +60,15 @@ public class Pedido {
                 ", idCliente=" + this.idCliente +
                 ", enderecoEntrega='" + this.enderecoEntrega + '\'' +
                 ", pratos=" + this.pratos +
+                ", valorTotal=" + this.valorTotal +
                 '}';
+    }
+
+    private void calculaValorTotal() {
+        this.valorTotal = 0;
+        for (Prato aux: this.pratos) {
+            this.valorTotal += aux.getPreco();
+        }
     }
 
 }

@@ -25,6 +25,14 @@ public class RestauranteRepositorio {
         return null;
     }
 
+    public Restaurante get(int idRestaurante) {
+        for (Restaurante restaurante : this.lista) {
+            if (restaurante.getIdRestaurante() == idRestaurante)
+                return restaurante;
+        }
+        return null;
+    }
+
     public List<Restaurante> findAll() {
         return Collections.unmodifiableList(lista);
     }

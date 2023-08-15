@@ -17,9 +17,10 @@ public class RestauranteServico {
         this.restauranteRepositorio = restauranteRepositorio;
     }
 
-    public void criaRestaurante(String nome, String endereco) {
+    public int criaRestaurante(String nome, String endereco) {
         Restaurante restaurante = new Restaurante(++CONTADOR_ID_RESTAURANTE, nome, endereco);
         this.restauranteRepositorio.add(restaurante);
+        return restaurante.getIdRestaurante();
     }
 
     public List<Restaurante> listaRestaurantes() {
@@ -30,8 +31,19 @@ public class RestauranteServico {
         return this.restauranteRepositorio.get(nomeRestaurante);
     }
 
+    protected Restaurante buscaRetaurante(int idRestaurante) {
+        return this.restauranteRepositorio.get(idRestaurante);
+    }
+
     public List<Prato> listaMenuRestaurante(String nomeRestaurante, PratoServico pratoServico) {
-        return pratoServico.listaPratosRestaurante(nomeRestaurante, this);
+        Restaurante restaurante = buscaRestaurante(nomeRestaurante);
+        if(restaurante != null)
+            return pratoServico.listaPratosRestaurante(restaurante.getIdRestaurante());
+        return null;
+    }
+
+    public List<Prato> listaMenuRestaurante(int idRestaurante, PratoServico pratoServico) {
+        return pratoServico.listaPratosRestaurante(idRestaurante);
     }
 
     public int fazPedido(String nomeCliente, String nomeRestaurante, String enderecoEntrega,
@@ -41,5 +53,13 @@ public class RestauranteServico {
         return pedidoServico.criaPedido(enderecoEntrega, pratos, restaurante.getIdRestaurante(), cliente.getIdCliente());
 
     }
+
+    public int fazPedido(String enderecoEntrega, List<Integer> idPratos, int idRestaurante, int idCliente,
+                         PratoServico pratoServico, PedidoServico pedidoServico) {
+        List<Prato> pratos = pratoServico.listaPratosPorId(idPratos);
+        return pedidoServico.criaPedido(enderecoEntrega, pratos, idRestaurante, idCliente);
+    }
+
+
 
 }

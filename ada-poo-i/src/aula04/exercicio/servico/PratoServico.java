@@ -4,6 +4,7 @@ import aula04.exercicio.dominio.Prato;
 import aula04.exercicio.dominio.Restaurante;
 import aula04.exercicio.repositorio.PratoRepositorio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,25 +18,46 @@ public class PratoServico {
         this.pratoRepositorio = pratoRepositorio;
     }
 
-    public void criaPrato(String nomeRestaurante, String nome, double preco, String descricao, RestauranteServico restauranteServico) {
-        Restaurante restaurante = restauranteServico.buscaRestaurante(nomeRestaurante);
+    public int criaPrato(int idRestaurante, String nome, double preco, String descricao) {
+        Prato prato = new Prato(++CONTADOR_ID_PRATO, idRestaurante, nome, preco, descricao);
+        this.pratoRepositorio.add(prato);
 
-        if(restaurante != null) {
-            this.pratoRepositorio.add(new Prato(++CONTADOR_ID_PRATO, restaurante.getIdRestaurante(), nome, preco, descricao));
-        }
+        return prato.getIdPrato();
     }
 
-    public List<Prato> listaPratosRestaurante(String nomeRestaurante, RestauranteServico restauranteServico) {
-        Restaurante restaurante = restauranteServico.buscaRestaurante(nomeRestaurante);
-        if(restaurante != null) {
-            return this.pratoRepositorio.findAll()
-                    .stream()
-                    .filter(f -> f.getIdRestaurante() == restaurante.getIdRestaurante())
-                    .collect(Collectors.toList());
-        }
-
-        return null;
+    public List<Prato> listaPratos() {
+        return this.pratoRepositorio.findAll();
     }
 
+    protected Prato buscaPrato(String nomePrato) {
+        return this.pratoRepositorio.get(nomePrato);
+    }
+
+    protected Prato buscaPrato(int idPrato) {
+        return this.pratoRepositorio.get(idPrato);
+    }
+
+    public List<Prato> listaPratosRestaurante(int idRestaurante) {
+        return this.pratoRepositorio.findAll()
+                .stream()
+                .filter(f -> f.getIdRestaurante() == idRestaurante)
+                .collect(Collectors.toList());
+    }
+
+    public List<Prato> listaPratosPorId(List<Integer> ids) {
+//        return this.pratoRepositorio.findAll()
+//                .stream()
+//                .filter(f -> ids.contains(f.getIdPrato()))
+//                .collect(Collectors.toList());
+        List<Prato> pratos = new ArrayList<>();
+        Prato aux;
+        for (Integer id: ids) {
+            aux = buscaPrato(id);
+            if(aux != null)
+                pratos.add(aux);
+        }
+
+        return pratos;
+    }
 
 }

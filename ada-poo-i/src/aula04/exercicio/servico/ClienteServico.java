@@ -14,9 +14,10 @@ public class ClienteServico {
         this.clienteRepositorio = clienteRepositorio;
     }
 
-    public void criaCliente(String nome) {
+    public int criaCliente(String nome) {
         Cliente cliente = new Cliente(++CONTADOR_ID_CLIENTE, nome);
         this.clienteRepositorio.add(cliente);
+        return cliente.getIdCliente();
     }
 
     protected Cliente buscaCliente(String nomeCliente) {
