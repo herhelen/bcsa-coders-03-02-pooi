@@ -1,9 +1,7 @@
 package aula04.exercicio.servico;
 
 import aula04.exercicio.dominio.Cliente;
-import aula04.exercicio.dominio.Restaurante;
 import aula04.exercicio.repositorio.ClienteRepositorio;
-import aula04.exercicio.repositorio.RestauranteRepositorio;
 
 import java.util.List;
 

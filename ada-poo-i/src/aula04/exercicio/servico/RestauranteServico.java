@@ -13,9 +13,6 @@ public class RestauranteServico {
     private RestauranteRepositorio restauranteRepositorio;
     private static int CONTADOR_ID_RESTAURANTE;
 
-    private static int CONTADOR_ID_PEDIDO;
-
-
     public RestauranteServico(RestauranteRepositorio restauranteRepositorio) {
         this.restauranteRepositorio = restauranteRepositorio;
     }
@@ -37,14 +34,12 @@ public class RestauranteServico {
         return pratoServico.listaPratosRestaurante(nomeRestaurante, this);
     }
 
-    public void fazPedido(String nomeCliente, String nomeRestaurante, String enderecoEntrega, List<Prato> pratos, ClienteServico clienteServico) {
+    public int fazPedido(String nomeCliente, String nomeRestaurante, String enderecoEntrega,
+                          List<Prato> pratos, ClienteServico clienteServico, PedidoServico pedidoServico) {
         Cliente cliente = clienteServico.buscaCliente(nomeCliente);
         Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
-        Pedido pedido = new Pedido(++CONTADOR_ID_PEDIDO, restaurante.getIdRestaurante(), cliente.getIdCliente(), enderecoEntrega, pratos);
+        return pedidoServico.criaPedido(enderecoEntrega, pratos, restaurante.getIdRestaurante(), cliente.getIdCliente());
 
-        System.out.println(pedido);
     }
-
-    // listar os pedidos do restau usando PedidoServico (PedidoRepositorio)
 
 }
