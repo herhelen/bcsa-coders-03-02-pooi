@@ -4,6 +4,7 @@ import aula04.exercicio.dominio.Cliente;
 import aula04.exercicio.repositorio.ClienteRepositorio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClienteServico {
 
@@ -25,6 +26,10 @@ public class ClienteServico {
     }
 
     public List<Cliente> listaClientes() {
-        return this.clienteRepositorio.findAll();
+        return this.clienteRepositorio.findAll()
+                .stream()
+                .filter(f -> f instanceof Cliente)
+                .map(f -> (Cliente) f)
+                .collect(Collectors.toList());
     }
 }

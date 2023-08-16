@@ -1,12 +1,12 @@
 package aula04.exercicio.servico;
 
 import aula04.exercicio.dominio.Cliente;
-import aula04.exercicio.dominio.Pedido;
 import aula04.exercicio.dominio.Prato;
 import aula04.exercicio.dominio.Restaurante;
 import aula04.exercicio.repositorio.RestauranteRepositorio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RestauranteServico {
 
@@ -24,7 +24,11 @@ public class RestauranteServico {
     }
 
     public List<Restaurante> listaRestaurantes() {
-        return this.restauranteRepositorio.findAll();
+        return this.restauranteRepositorio.findAll()
+                .stream()
+                .filter(f -> f instanceof Restaurante)
+                .map(f -> (Restaurante) f)
+                .collect(Collectors.toList());
     }
 
     protected Restaurante buscaRestaurante(String nomeRestaurante) {
@@ -32,11 +36,15 @@ public class RestauranteServico {
     }
 
     protected Restaurante buscaRetaurante(int idRestaurante) {
-        return this.restauranteRepositorio.get(idRestaurante);
+        Object temp = this.restauranteRepositorio.get(idRestaurante);
+        if(temp instanceof Restaurante) {
+            return (Restaurante) temp;
+        }
+        return null;
     }
 
     public List<Prato> listaMenuRestaurante(String nomeRestaurante, PratoServico pratoServico) {
-        Restaurante restaurante = buscaRestaurante(nomeRestaurante);
+        Restaurante restaurante = this.buscaRestaurante(nomeRestaurante);
         if(restaurante != null)
             return pratoServico.listaPratosRestaurante(restaurante.getIdRestaurante());
         return null;
@@ -59,7 +67,5 @@ public class RestauranteServico {
         List<Prato> pratos = pratoServico.listaPratosPorId(idPratos);
         return pedidoServico.criaPedido(enderecoEntrega, pratos, idRestaurante, idCliente);
     }
-
-
 
 }

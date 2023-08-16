@@ -6,34 +6,44 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RestauranteRepositorio {
-    private List<Restaurante> lista;
+public class RestauranteRepositorio extends Repositorio {
 
     public RestauranteRepositorio() {
-        lista = new ArrayList<>();
+        super();
+        this.lista = new ArrayList<>();
     }
 
-    public void add(Restaurante restaurante) {
-        this.lista.add(restaurante);
+    @Override
+    public void add(Object obj) {
+        this.lista.add(obj);
+    }
+
+    @Override
+    public Object get(int id) {
+        for (Object obj : this.lista) {
+            if (obj instanceof Restaurante) {
+                Restaurante restaurante = (Restaurante) obj;
+                if (restaurante.getIdRestaurante() == id)
+                    return obj;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Object> findAll() {
+        return Collections.unmodifiableList(this.lista);
     }
 
     public Restaurante get(String nomeRestaurante) {
-        for (Restaurante restaurante : this.lista) {
-            if (restaurante.getNome().equals(nomeRestaurante))
-                return restaurante;
+        for (Object obj : this.lista) {
+            if (obj instanceof Restaurante) {
+                Restaurante restaurante = (Restaurante) obj;
+                if (restaurante.getNome().equals(nomeRestaurante))
+                    return restaurante;
+            }
         }
         return null;
     }
 
-    public Restaurante get(int idRestaurante) {
-        for (Restaurante restaurante : this.lista) {
-            if (restaurante.getIdRestaurante() == idRestaurante)
-                return restaurante;
-        }
-        return null;
-    }
-
-    public List<Restaurante> findAll() {
-        return Collections.unmodifiableList(lista);
-    }
 }

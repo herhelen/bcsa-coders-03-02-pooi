@@ -25,17 +25,25 @@ public class PedidoServico {
     }
 
     protected Pedido buscaPedido(int idPedido) {
-        return this.pedidoRepositorio.get(idPedido);
+        Object temp = this.pedidoRepositorio.get(idPedido);
+        if(temp instanceof Pedido) {
+            return (Pedido) temp;
+        }
+        return null;
     }
 
     public List<Pedido> listaPedidos() {
-        return this.pedidoRepositorio.findAll();
+        return this.pedidoRepositorio.findAll()
+                .stream()
+                .filter(f -> f instanceof Pedido)
+                .map(f -> (Pedido) f)
+                .collect(Collectors.toList());
     }
 
     public List<Pedido> listaPedidosRestaurante(String nomeRestaurante, RestauranteServico restauranteServico) {
         Restaurante restaurante = restauranteServico.buscaRestaurante(nomeRestaurante);
         if(restaurante != null) {
-            return this.pedidoRepositorio.findAll()
+            return this.listaPedidos()
                     .stream()
                     .filter(f -> f.getIdRestaurante() == restaurante.getIdRestaurante())
                     .collect(Collectors.toList());
@@ -47,7 +55,7 @@ public class PedidoServico {
     public List<Pedido> listaPedidosCliente(String nomeCleitne, ClienteServico clienteServico) {
         Cliente cliente = clienteServico.buscaCliente(nomeCleitne);
         if(cliente != null) {
-            return this.pedidoRepositorio.findAll()
+            return this.listaPedidos()
                     .stream()
                     .filter(f -> f.getIdCliente() == cliente.getIdCliente())
                     .collect(Collectors.toList());
@@ -57,14 +65,14 @@ public class PedidoServico {
     }
 
     public List<Pedido> listaPedidosRestaurante(int idRestaurante) {
-        return this.pedidoRepositorio.findAll()
+        return this.listaPedidos()
                 .stream()
                 .filter(f -> f.getIdRestaurante() == idRestaurante)
                 .collect(Collectors.toList());
     }
 
     public List<Pedido> listaPedidosCliente(int idCliente) {
-        return this.pedidoRepositorio.findAll()
+        return this.listaPedidos()
                 .stream()
                 .filter(f -> f.getIdCliente() == idCliente)
                 .collect(Collectors.toList());

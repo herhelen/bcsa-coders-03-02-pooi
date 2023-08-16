@@ -6,34 +6,43 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ClienteRepositorio {
-    private List<Cliente> lista;
+public class ClienteRepositorio extends Repositorio {
 
     public ClienteRepositorio() {
-        lista = new ArrayList<>();
+        super();
+        this.lista = new ArrayList<>();
     }
 
-    public void add(Cliente cliente) {
-        this.lista.add(cliente);
+    @Override
+    public void add(Object obj) {
+        this.lista.add(obj);
+    }
+
+    @Override
+    public Object get(int id) {
+        for (Object obj : this.lista) {
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getIdCliente() == id)
+                    return obj;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Object> findAll() {
+        return Collections.unmodifiableList(this.lista);
     }
 
     public Cliente get(String nomeCliente) {
-        for (Cliente cliente : this.lista) {
-            if (cliente.getNome().equals(nomeCliente))
-                return cliente;
+        for (Object obj : this.lista) {
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getNome().equals(nomeCliente))
+                    return cliente;
+            }
         }
         return null;
-    }
-
-    public Cliente get(int idCliente) {
-        for (Cliente cliente : this.lista) {
-            if (cliente.getIdCliente() == idCliente)
-                return cliente;
-        }
-        return null;
-    }
-
-    public List<Cliente> findAll() {
-        return Collections.unmodifiableList(lista);
     }
 }

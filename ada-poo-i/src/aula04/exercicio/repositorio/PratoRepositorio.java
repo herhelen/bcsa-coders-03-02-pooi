@@ -6,41 +6,44 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PratoRepositorio {
-    private List<Prato> lista;
+public class PratoRepositorio extends Repositorio {
 
     public PratoRepositorio() {
-        lista = new ArrayList<>();
-    }
-
-    public void add(Prato prato) {
-        this.lista.add(prato);
-    }
-
-    public Prato get(String nomePrato) {
-        for (Prato prato : this.lista) {
-            if (prato.getNome().equals(nomePrato))
-                return prato;
-        }
-        return null;
-    }
-
-    public Prato get(int idPrato) {
-        for (Prato prato : this.lista) {
-            if (prato.getIdPrato() == idPrato)
-                return prato;
-        }
-        return null;
-    }
-
-    public List<Prato> findAll() {
-        return Collections.unmodifiableList(this.lista);
+        super();
+        this.lista = new ArrayList<>();
     }
 
     @Override
-    public String toString() {
-        return "PratoRepositorio{" +
-                "lista=" + this.lista +
-                '}';
+    public void add(Object obj) {
+        this.lista.add(obj);
     }
+
+    @Override
+    public Object get(int id) {
+        for (Object obj : this.lista) {
+            if (obj instanceof Prato) {
+                Prato prato = (Prato) obj;
+                if (prato.getIdPrato() == id)
+                    return obj;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Object> findAll() {
+        return Collections.unmodifiableList(this.lista);
+    }
+
+    public Prato get(String nomePrato) {
+        for (Object obj : this.lista) {
+            if (obj instanceof Prato) {
+                Prato prato = (Prato) obj;
+                if (prato.getNome().equals(nomePrato))
+                    return prato;
+            }
+        }
+        return null;
+    }
+
 }

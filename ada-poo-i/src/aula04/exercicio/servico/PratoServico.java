@@ -1,7 +1,6 @@
 package aula04.exercicio.servico;
 
 import aula04.exercicio.dominio.Prato;
-import aula04.exercicio.dominio.Restaurante;
 import aula04.exercicio.repositorio.PratoRepositorio;
 
 import java.util.ArrayList;
@@ -26,7 +25,11 @@ public class PratoServico {
     }
 
     public List<Prato> listaPratos() {
-        return this.pratoRepositorio.findAll();
+        return this.pratoRepositorio.findAll()
+                .stream()
+                .filter(f -> f instanceof Prato)
+                .map(f -> (Prato) f)
+                .collect(Collectors.toList());
     }
 
     protected Prato buscaPrato(String nomePrato) {
@@ -34,25 +37,25 @@ public class PratoServico {
     }
 
     protected Prato buscaPrato(int idPrato) {
-        return this.pratoRepositorio.get(idPrato);
+        Object temp = this.pratoRepositorio.get(idPrato);
+        if(temp instanceof Prato) {
+            return (Prato) temp;
+        }
+        return null;
     }
 
     public List<Prato> listaPratosRestaurante(int idRestaurante) {
-        return this.pratoRepositorio.findAll()
+        return this.listaPratos()
                 .stream()
                 .filter(f -> f.getIdRestaurante() == idRestaurante)
                 .collect(Collectors.toList());
     }
 
     public List<Prato> listaPratosPorId(List<Integer> ids) {
-//        return this.pratoRepositorio.findAll()
-//                .stream()
-//                .filter(f -> ids.contains(f.getIdPrato()))
-//                .collect(Collectors.toList());
         List<Prato> pratos = new ArrayList<>();
         Prato aux;
         for (Integer id: ids) {
-            aux = buscaPrato(id);
+            aux = this.buscaPrato(id);
             if(aux != null)
                 pratos.add(aux);
         }

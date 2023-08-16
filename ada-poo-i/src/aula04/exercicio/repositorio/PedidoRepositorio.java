@@ -6,26 +6,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PedidoRepositorio {
-    private List<Pedido> lista;
+public class PedidoRepositorio extends Repositorio {
 
     public PedidoRepositorio() {
-        lista = new ArrayList<>();
+        super();
+        this.lista = new ArrayList<>();
     }
 
-    public void add(Pedido pedido) {
-        this.lista.add(pedido);
+    @Override
+    public void add(Object obj) {
+        this.lista.add(obj);
     }
 
-    public Pedido get(int idPedido) {
-        for (Pedido pedido : this.lista) {
-            if (pedido.getIdPedido() == idPedido)
-                return pedido;
+    @Override
+    public Object get(int id) {
+        for (Object obj : this.lista) {
+            if (obj instanceof Pedido) {
+                Pedido pedido = (Pedido) obj;
+                if (pedido.getIdPedido() == id)
+                    return obj;
+            }
         }
         return null;
     }
 
-    public List<Pedido> findAll() {
-        return Collections.unmodifiableList(lista);
+    @Override
+    public List<Object> findAll() {
+        return Collections.unmodifiableList(this.lista);
     }
+
 }
