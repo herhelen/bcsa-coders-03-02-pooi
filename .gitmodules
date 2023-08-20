@@ -1,0 +1,3 @@
+[submodule "repo-professor"]
+	path = repo-professor
+	url = git@github.com:jorgeelucas/santander-pooi.git
