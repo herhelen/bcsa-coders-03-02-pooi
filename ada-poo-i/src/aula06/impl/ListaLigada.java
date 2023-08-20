@@ -45,6 +45,22 @@ public class ListaLigada extends Lista {
         return this.size;
     }
 
+    @Override
+    public void remove(int idx) {
+        if(idx < 0 || idx >= this.size) {
+            throw new IndexOutOfBoundsException(String.format("Posição %d inválida.", idx));
+        }
+
+        Elemento anterior = this.inicio;
+        Elemento temp = this.inicio;
+        for(int i = 0; i < idx; i++) {
+            anterior = temp;
+            temp = temp.getProximo();
+        }
+
+        anterior.setProximo(temp.getProximo());
+        this.size--;
+    }
 
     class Elemento {
         private Object valor;

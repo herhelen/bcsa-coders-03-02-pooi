@@ -28,4 +28,16 @@ public class ArrayLista extends Lista {
     public int size() {
         return this.size;
     }
+
+    @Override
+    public void remove(int idx) {
+        if(idx < 0 || idx >= this.size) {
+            throw new IndexOutOfBoundsException(String.format("Posição %d inválida.", idx));
+        }
+
+        for(int i = idx; i < this.size - 1; i++) {
+            this.array[i] = this.array[i + 1];
+        }
+        this.size--;
+    }
 }
