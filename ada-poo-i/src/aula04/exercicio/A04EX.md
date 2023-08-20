@@ -44,3 +44,6 @@ de Orientação a Objetos pratique a organização de código em pacotes, classe
 - Em seguida, concentre-se em implementar a lógica principal, como adicionar restaurantes, <br />
   pratos e fazer pedidos.
 - Finalmente, implemente a interface do usuário para interagir com o sistema.
+
+---
+![rascunho de DER](restaurante.png)
