@@ -2,10 +2,12 @@ package aula06;
 
 import aula06.contrato.Lista;
 import aula06.impl.ArrayLista;
+import aula06.impl.ListaLigada;
 
 public class TesteLista {
     public static void main(String[] args) {
-        Lista lista = new ArrayLista();
+//        Lista lista = new ArrayLista();
+        Lista lista = new ListaLigada();
 
         lista.add("Objeto 1");
         lista.add(2);
@@ -14,6 +16,8 @@ public class TesteLista {
         lista.add(true);
 
         imprimeLista(lista);
+
+        System.out.println(lista.get(3));
 
         try {
             lista.get(-1);
